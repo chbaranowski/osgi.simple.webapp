@@ -6,17 +6,18 @@ todoApp.factory('Todos', ['$resource', function($resource) {
 
 todoApp.controller('TodoController',['$scope','Todos', function($scope, Todos) {
 	
-	  $scope.todos = Todos.get();
+	  $scope.todos = Todos.query();
 		
 	  $scope.addTodo = function() {
-	    Todos.save({}, { "text":$scope.todoText, "done":false });
+		Todos.save({}, { "text":$scope.todoText, "done":false });
+		$scope.todos = Todos.query();
 		$scope.todoText = '';
 	  };
 	 
 	  $scope.remaining = function() {
 	    var count = 0;
 	    angular.forEach($scope.todos, function(todo) {
-	      count += todo.done ? 0 : 1;
+	      count += todo.done ? false : true;
 	    });
 	    return count;
 	  };
@@ -29,6 +30,6 @@ todoApp.controller('TodoController',['$scope','Todos', function($scope, Todos) {
 	    	  Todos.delete({todoId: todo.id});
 	      }
 	    });
-	    $scope.todos = Todos.get();
+	    $scope.todos = Todos.query();
 	  };
 }]);
