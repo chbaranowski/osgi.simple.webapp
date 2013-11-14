@@ -1,4 +1,4 @@
-package osgi.simple.webapp;
+package osgi.simple.todo;
 
 public class Todo {
 	public Long 	id;

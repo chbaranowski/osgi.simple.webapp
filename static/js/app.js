@@ -41,4 +41,8 @@ todoApp.controller('TodoController',['$scope','todoResource', function($scope, t
 	        $scope.todos = todoResource.query();
 	    });
 	  };
+	  
+	  $scope.udateTodo = function(todo) {
+		  todoResource.save({}, todo)
+	  }
 }]);

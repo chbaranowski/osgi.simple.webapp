@@ -1,0 +1,3 @@
+-includeresource: \
+        {static=static}, \
+        {configuration=configuration}

@@ -1,4 +1,4 @@
-package osgi.simple.webapp;
+package osgi.simple.todo.xml;
 
 import java.io.File;
 import java.util.Map;
@@ -17,6 +17,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import osgi.simple.todo.Todo;
+import osgi.simple.todo.TodoRepository;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Deactivate;
@@ -87,6 +89,12 @@ public class XMLFileTodoRepository implements TodoRepository {
 
 	public Iterable<Todo> findTodos() {
 		return todoMap.values();
+	}
+
+	@Override
+	public void update(Todo todo) {
+		todoMap.remove(todo.id);
+		todoMap.put(todo.id, todo);
 	}
 
 }

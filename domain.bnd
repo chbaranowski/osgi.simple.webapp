@@ -1,0 +1,5 @@
+Private-Package: \
+	osgi.simple.todo.xml
+
+Export-Package: \
+	osgi.simple.todo

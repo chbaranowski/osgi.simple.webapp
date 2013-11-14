@@ -1,5 +1,7 @@
-package osgi.simple.webapp;
+package osgi.simple.rest;
 
+import osgi.simple.todo.Todo;
+import osgi.simple.todo.TodoRepository;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
 import aQute.service.rest.Options;
@@ -20,7 +22,12 @@ public class TodoResource implements ResourceManager {
 	}
 	
 	public void postTodos(TodoOptions opts) {
-		todoRepository.insert(opts._());
+		Todo todo = opts._();
+		if(todo.id == null) {
+			todoRepository.insert(todo);
+		} else {
+			todoRepository.update(todo);
+		}
 	}
 	
 	public void deleteTodos(TodoOptions opts, long id) {
