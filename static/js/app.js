@@ -5,7 +5,7 @@ todoApp.factory('todoResource', ['$resource', function($resource) {
 		archive: {
 			url: '/rest/archive',
 			method: 'DELETE',
-			params: {todoIds: '@todoIds'}		
+			params: {todoIds: '@todoIds'}
 		}
 	});
 }]);
