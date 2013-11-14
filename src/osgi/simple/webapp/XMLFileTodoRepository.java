@@ -22,7 +22,7 @@ import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Deactivate;
 
 @Component(immediate = true)
-public class MemoryTodoRepository implements TodoRepository {
+public class XMLFileTodoRepository implements TodoRepository {
 
 	AtomicLong counter = new AtomicLong();
 	Map<Long, Todo> todoMap = new ConcurrentHashMap<>();
