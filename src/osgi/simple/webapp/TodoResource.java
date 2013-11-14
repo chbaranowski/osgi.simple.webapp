@@ -9,6 +9,7 @@ import aQute.service.rest.ResourceManager;
 public class TodoResource implements ResourceManager {
 	
 	interface TodoOptions extends Options {
+		Long[] todoIds();
 		Todo _();
 	}
 	
@@ -24,6 +25,13 @@ public class TodoResource implements ResourceManager {
 	
 	public void deleteTodos(TodoOptions opts, long id) {
 		todoRepository.delete(id);
+	}
+	
+	public void deleteArchive(TodoOptions opts) {
+		Long[] todoIds = opts.todoIds();
+		for (Long todoId : todoIds) {
+			todoRepository.delete(todoId);
+		}
 	}
 
 	@Reference

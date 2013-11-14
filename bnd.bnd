@@ -5,5 +5,6 @@
 -includeresource: \
         {static=static}, \
         {configuration=configuration}
+
 Private-Package: \
 	osgi.simple.webapp

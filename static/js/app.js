@@ -1,16 +1,23 @@
 var todoApp = angular.module('todoApp', ['ngResource']);
 
-todoApp.factory('Todos', ['$resource', function($resource) {
-	return $resource( '/rest/todos/:todoId', { todoId: '@todoId' } );
+todoApp.factory('todoResource', ['$resource', function($resource) {
+	return $resource( '/rest/todos/:todoId', { todoId: '@todoId' }, {
+		archive: {
+			url: '/rest/archive',
+			method: 'DELETE',
+			params: {todoIds: '@todoIds'}		
+		}
+	});
 }]);
 
-todoApp.controller('TodoController',['$scope','Todos', function($scope, Todos) {
+todoApp.controller('TodoController',['$scope','todoResource', function($scope, todoResource) {
 	
-	  $scope.todos = Todos.query();
+	  $scope.todos = todoResource.query();
 		
 	  $scope.addTodo = function() {
-		Todos.save({}, { "text":$scope.todoText, "done":false });
-		$scope.todos = Todos.query();
+		todoResource.save({}, { "text":$scope.todoText, "done":false }).$promise.then(function() {
+			$scope.todos = todoResource.query()
+		})
 		$scope.todoText = '';
 	  };
 	 
@@ -23,13 +30,15 @@ todoApp.controller('TodoController',['$scope','Todos', function($scope, Todos) {
 	  };
 	 
 	  $scope.archive = function() {
+	    var todoIds = [];
 	    var todos = $scope.todos;
-	    $scope.todos = [];
 	    angular.forEach(todos, function(todo) {
 	      if (todo.done) {
-	    	  Todos.delete({todoId: todo.id});
+	    	todoIds.push(todo.id);
 	      }
 	    });
-	    $scope.todos = Todos.query();
+	    todoResource.archive({todoIds: todoIds}).$promise.then(function() {
+	        $scope.todos = todoResource.query();
+	    });
 	  };
 }]);
