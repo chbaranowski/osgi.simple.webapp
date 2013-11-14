@@ -1,7 +1,8 @@
+# aQute.twitter.bootstrap;version=3.0.0, \
+# com.google.angularjs;version=latest,\
+
 -runbundles: \
         cnf.run.base, \
         cnf.run.web, \
         cnf.run.web.debug, \
-#        aQute.twitter.bootstrap;version=3.0.0, \
-#        com.google.angularjs;version=latest,\
         osgi.simple.webapp;version=latest
