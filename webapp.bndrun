@@ -3,5 +3,5 @@
         cnf.run.web, \
         cnf.run.web.debug, \
         aQute.twitter.bootstrap;version=3.0.0, \
-        osgi.static.angularjs;version=latest,\
+       	com.google.angularjs;version=latest,\
         osgi.simple.webapp;version=latest
